@@ -1,36 +1,122 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 合同会社AKK - 公式ウェブサイト
 
-## Getting Started
+北海道の良質な一次産品・加工品を国内外へ届ける合同会社AKKの公式サイト
 
-First, run the development server:
+## 🚀 技術スタック
+
+- **Next.js 16** (App Router)
+- **TypeScript**
+- **Tailwind CSS**
+- **React 19**
+
+## 📋 機能
+
+- ✅ レスポンシブデザイン（デスクトップ・モバイル対応）
+- ✅ SEO最適化（メタデータ、構造化データ）
+- ✅ 高速パフォーマンス
+- ✅ アクセシビリティ対応
+- ✅ モダンなUI/UX
+
+## 🔧 開発環境セットアップ
+
+### 必要な環境
+
+- Node.js 18.17以上
+- npm または yarn
+
+### インストール
 
 ```bash
+# 依存関係のインストール
+npm install
+
+# 開発サーバーの起動
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+開発サーバーは [http://localhost:3000](http://localhost:3000) で起動します。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### ビルド
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# 本番環境用にビルド
+npm run build
 
-## Learn More
+# ビルドしたアプリケーションを起動
+npm start
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 📂 プロジェクト構造
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+akk-nextjs/
+├── app/                # Next.js App Router
+│   ├── layout.tsx      # ルートレイアウト（メタデータ、構造化データ）
+│   ├── page.tsx        # ホームページ
+│   └── globals.css     # グローバルスタイル
+├── components/         # 再利用可能なReactコンポーネント
+│   ├── Hero.tsx        # ヒーローセクション
+│   ├── Section.tsx     # セクションコンポーネント
+│   ├── Card.tsx        # カードコンポーネント
+│   └── Footer.tsx      # フッター
+├── lib/                # ユーティリティ関数
+│   └── structured-data.ts # SEO構造化データ
+└── public/             # 静的ファイル
+    ├── docs/           # PDFファイル
+    └── images/         # 画像ファイル
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🌐 デプロイ
 
-## Deploy on Vercel
+このプロジェクトはVercelでのデプロイに最適化されています。
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/akk-nextjs)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Vercelでのデプロイ手順
+
+1. GitHubリポジトリと連携
+2. プロジェクトをインポート
+3. 環境変数の設定（必要に応じて）
+4. デプロイ
+
+## 📝 カスタマイズ
+
+### カラーパレット
+
+グローバルカラーは `app/globals.css` で定義されています：
+
+```css
+:root {
+  --bg: #f5f6fb;
+  --navy: #0c2140;
+  --gold: #c99a2e;
+  /* ... */
+}
+```
+
+### メタデータ
+
+SEOメタデータは `app/layout.tsx` で設定されています。
+
+### 構造化データ
+
+Google検索用の構造化データは `lib/structured-data.ts` で管理されています。
+
+## 📄 ライセンス
+
+© 2025 合同会社AKK All Rights Reserved.
+
+## 📧 お問い合わせ
+
+- **電話**: 080-3265-8361
+- **メール**: info@akk-hokkaido.com
+- **所在地**: 〒064-0808 北海道札幌市中央区南8条西13丁目4-7-405
+
+---
+
+**開発者向け注意事項**
+
+- PDFファイルは `public/docs/` ディレクトリに配置してください
+- 画像は `public/images/` に配置してください
+- コンポーネントはできるだけ再利用可能に設計されています
+- Tailwind CSSのユーティリティクラスを活用してください
