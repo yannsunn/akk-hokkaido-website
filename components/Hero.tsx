@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -92,7 +91,7 @@ export default function Hero() {
 
       <div className="relative flex-1 min-w-[280px] min-h-[300px] lg:min-h-[400px]">
         <div className="relative w-full h-full rounded-2xl lg:rounded-[32px] shadow-[0_25px_60px_rgba(0,0,0,0.5)] border border-white/10 overflow-hidden bg-slate-800">
-          {/* スライダー画像 - Next.js Image最適化 */}
+          {/* スライダー画像 - 最適化済み */}
           {slides.map((slide, index) => (
             <div
               key={index}
@@ -100,18 +99,16 @@ export default function Hero() {
                 index === currentSlide ? 'opacity-100' : 'opacity-0'
               }`}
             >
-              <Image
+              <img
                 src={slide.image}
                 alt={slide.alt}
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover"
+                className="w-full h-full object-cover"
                 style={{
                   filter: 'brightness(0.85)'
                 }}
-                priority={index === 0}
-                quality={70}
-                unoptimized
+                loading={index === 0 ? 'eager' : 'lazy'}
+                fetchpriority={index === 0 ? 'high' : 'low'}
+                decoding="async"
               />
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/15 to-black/50 pointer-events-none" />
             </div>
