@@ -1,55 +1,8 @@
-﻿'use client';
+'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 export default function Hero() {
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  // 最適化: 画像サイズを小さく、画質を調整
-  const slides = [
-    {
-      image: 'https://images.unsplash.com/photo-1586864387634-56f7898d0aa7?auto=format&fit=crop&w=800&q=70',
-      alt: '北海道の美しい田園風景'
-    },
-    {
-      image: 'https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?auto=format&fit=crop&w=800&q=70',
-      alt: '物流倉庫の内部'
-    },
-    {
-      image: 'https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=800&q=70',
-      alt: '貨物コンテナと港'
-    },
-    {
-      image: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=70',
-      alt: '新鮮な農産物'
-    }
-  ];
-
-  useEffect(() => {
-    // ���ׂẲ摜���o�b�N�O���E���h�Ńv�����[�h
-    const preloaders = slides.map((slide, index) => {
-      if (index === 0) return null; // 1���ڂ͗D��ǂݍ��ݍς�
-      const img = new Image();
-      img.decoding = 'async';
-      img.src = slide.image;
-      return img;
-    });
-
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
-
-    return () => {
-      clearInterval(timer);
-      preloaders.forEach((img) => {
-        if (img) {
-          img.src = '';
-        }
-      });
-    };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <header className="relative flex flex-col lg:flex-row gap-8 lg:gap-12 px-[5vw] py-16 lg:py-32 overflow-hidden bg-gradient-to-br from-[#0a0e1a] via-[#1e293b] to-[#0f172a]">
       {/* 背景グラデーションオーバーレイ */}
@@ -83,84 +36,24 @@ export default function Hero() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </a>
-          <a
-            href="/docs/akk-plan.pdf"
-            className="group inline-flex items-center justify-center gap-2 px-6 py-3 lg:px-8 lg:py-4 rounded-full text-sm lg:text-base font-semibold glass-effect text-white transition-all hover:bg-white/10 hover:-translate-y-1"
-          >
-            事業計画書
-            <svg className="w-3.5 h-3.5 lg:w-4 lg:h-4 transition-transform group-hover:translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
-          </a>
         </div>
       </div>
 
       <div className="relative flex-1 min-w-[280px] min-h-[300px] lg:min-h-[400px]">
         <div className="relative w-full h-full rounded-2xl lg:rounded-[32px] shadow-[0_25px_60px_rgba(0,0,0,0.5)] border border-white/10 overflow-hidden bg-slate-800">
-          {/* スライダー画像 - 最適化済み */}
-          {slides.map((slide, index) => (
-            <div
-              key={index}
-              className={`absolute inset-0 transition-opacity duration-1000 ${
-                index === currentSlide ? 'opacity-100' : 'opacity-0'
-              }`}
-              style={{
-                zIndex: index === 0 ? 1 : 0
-              }}
-            >
-              <img
-                src={slide.image}
-                alt={slide.alt}
-                className="w-full h-full object-cover"
-                style={{
-                  filter: 'brightness(0.85)'
-                }}
-                loading={index === 0 ? 'eager' : 'lazy'}
-                fetchPriority={index === 0 ? 'high' : 'low'}
-                decoding="async"
-              />
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/15 to-black/50 pointer-events-none" />
-            </div>
-          ))}
-
-          {/* スライダーインジケーター */}
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-            {slides.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentSlide(index)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === currentSlide
-                    ? 'w-8 bg-blue-400'
-                    : 'bg-white/30 hover:bg-white/50'
-                }`}
-                aria-label={`スライド ${index + 1} に移動`}
-              />
-            ))}
-          </div>
-
-          {/* ナビゲーションボタン */}
-          <button
-            onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full glass-effect flex items-center justify-center text-white hover:bg-white/20 transition-all z-10"
-            aria-label="前のスライド"
-          >
-            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-          <button
-            onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full glass-effect flex items-center justify-center text-white hover:bg-white/20 transition-all z-10"
-            aria-label="次のスライド"
-          >
-            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
+          <img
+            src="https://images.unsplash.com/photo-1586864387634-56f7898d0aa7?auto=format&fit=crop&w=800&q=70"
+            alt="北海道の風景"
+            className="w-full h-full object-cover"
+            style={{
+              filter: 'brightness(0.85)'
+            }}
+            loading="eager"
+            fetchPriority="high"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/15 to-black/50 pointer-events-none" />
         </div>
       </div>
     </header>
   );
 }
-
