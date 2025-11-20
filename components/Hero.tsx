@@ -107,7 +107,7 @@ export default function Hero() {
                   filter: 'brightness(0.85)'
                 }}
                 loading={index === 0 ? 'eager' : 'lazy'}
-                fetchpriority={index === 0 ? 'high' : 'low'}
+                fetchPriority={index === 0 ? 'high' : 'low'}
                 decoding="async"
               />
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/15 to-black/50 pointer-events-none" />
