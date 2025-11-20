@@ -69,7 +69,7 @@ export default function Home() {
 
         {/* 代表メッセージ */}
         <Section id="message" label="MESSAGE" title="代表メッセージ">
-          <div className="max-w-3xl mx-auto bg-slate-50/60 p-6 lg:p-8 rounded-2xl border border-slate-200/60 shadow-sm">
+          <div className="max-w-3xl mx-auto bg-white/70 p-6 lg:p-8 rounded-2xl border border-slate-200/70 shadow-[0_6px_16px_rgba(0,0,0,0.04)]">
             <div className="text-sm lg:text-base text-slate-700 leading-relaxed space-y-4">
               <p className="mt-0">
                 はじめまして。代表の山木と申します。このたびは、合同会社AKKのホームページを
@@ -92,7 +92,7 @@ export default function Home() {
 
         {/* 会社概要 */}
         <Section id="company" label="COMPANY" title="会社概要">
-          <div className="max-w-3xl mx-auto bg-slate-50/60 p-6 lg:p-8 rounded-2xl border border-slate-200/60 shadow-sm">
+          <div className="max-w-3xl mx-auto bg-white/70 p-6 lg:p-8 rounded-2xl border border-slate-200/70 shadow-[0_6px_16px_rgba(0,0,0,0.04)]">
             <dl className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-4 m-0">
               <dt className="font-semibold text-slate-600">会社名</dt>
               <dd className="m-0 text-slate-800">合同会社AKK</dd>
@@ -127,7 +127,7 @@ export default function Home() {
         <Section id="contact" label="CONTACT" title="お問い合わせ">
           <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* お問い合わせフォーム */}
-            <div className="bg-slate-50/60 p-6 lg:p-8 rounded-2xl border border-slate-200/60 shadow-sm">
+            <div className="bg-white/70 p-6 lg:p-8 rounded-2xl border border-slate-200/70 shadow-[0_6px_16px_rgba(0,0,0,0.04)]">
               <h3 className="mt-0 mb-6 text-xl font-semibold text-slate-800">お問い合わせフォーム</h3>
               <form
                 className="flex flex-col gap-4"
@@ -175,7 +175,7 @@ export default function Home() {
                 </label>
                 <button
                   type="submit"
-                  className="mt-2 inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-semibold bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-lg transition-all hover:shadow-[0_15px_30px_rgba(59,130,246,0.3)] hover:-translate-y-1"
+                  className="mt-2 inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-semibold bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-[0_8px_20px_rgba(59,130,246,0.25)] transition-all hover:shadow-[0_12px_30px_rgba(59,130,246,0.35)] hover:-translate-y-1"
                 >
                   送信する
                 </button>
@@ -183,7 +183,7 @@ export default function Home() {
             </div>
 
             {/* 連絡先情報 */}
-            <div className="bg-slate-50/60 p-6 lg:p-8 rounded-2xl border border-slate-200/60 shadow-sm">
+            <div className="bg-white/70 p-6 lg:p-8 rounded-2xl border border-slate-200/70 shadow-[0_6px_16px_rgba(0,0,0,0.04)]">
               <h3 className="mt-0 mb-6 text-xl font-semibold text-slate-800">連絡先情報</h3>
               <div className="space-y-4 text-sm lg:text-base">
                 <div className="flex items-start gap-3">

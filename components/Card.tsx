@@ -9,10 +9,10 @@ interface CardProps {
 export function Card({ children, className = '', dark = false }: CardProps) {
   return (
     <article
-      className={`group relative p-5 lg:p-8 rounded-2xl lg:rounded-[28px] backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(59,130,246,0.15)] ${
+      className={`group relative p-5 lg:p-8 rounded-2xl lg:rounded-[28px] backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_15px_35px_rgba(59,130,246,0.12)] ${
         dark
-          ? 'bg-white/95 border border-slate-200 hover:bg-white shadow-[0_8px_20px_rgba(0,0,0,0.06)]'
-          : 'bg-white/80 border border-slate-200/80 hover:bg-white/95 shadow-[0_8px_20px_rgba(0,0,0,0.05)]'
+          ? 'bg-white/90 border border-slate-200/90 hover:bg-white shadow-[0_6px_16px_rgba(0,0,0,0.05)]'
+          : 'bg-white/75 border border-slate-200/70 hover:bg-white/90 shadow-[0_6px_16px_rgba(0,0,0,0.04)]'
       } ${className}`}
     >
       {/* ホバー時のグロー効果 */}
