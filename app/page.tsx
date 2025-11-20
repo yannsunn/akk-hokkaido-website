@@ -129,7 +129,12 @@ export default function Home() {
             {/* お問い合わせフォーム */}
             <div className="bg-white/5 p-6 lg:p-8 rounded-2xl border border-white/10">
               <h3 className="mt-0 mb-6 text-xl font-semibold text-white">お問い合わせフォーム</h3>
-              <form className="flex flex-col gap-4" action="https://example.com/form" method="post">
+              <form
+                className="flex flex-col gap-4"
+                action="mailto:info@akk-hokkaido.com"
+                method="post"
+                encType="text/plain"
+              >
                 <label className="flex flex-col font-semibold text-slate-300 gap-2">
                   お名前 <span className="text-red-400 text-sm">*</span>
                   <input

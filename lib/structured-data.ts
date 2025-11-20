@@ -1,11 +1,14 @@
+﻿const baseUrl = "https://akk-hokkaido.com";
+const logoUrl = `${baseUrl}/logo.svg`;
+
 export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "合同会社AKK",
   "alternateName": "AKK LLC",
-  "url": "https://akk-hokkaido.com",
-  "logo": "https://akk-hokkaido.com/logo.png",
-  "description": "北海道の良質な一次産品・加工品を国内外へ届ける合同会社AKK。小売・輸出入・商品企画を展開。",
+  "url": baseUrl,
+  "logo": logoUrl,
+  "description": "北海道の良質な一次産品と加工品を国内外へ届ける合同会社AKK。小売・輸出入・商品の企画開発を通じて、生産者と生活者をつなぐ事業を展開しています。",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "南8条西13丁目4-7-405",
@@ -23,7 +26,7 @@ export const organizationSchema = {
   },
   "founder": {
     "@type": "Person",
-    "name": "山木 明洋"
+    "name": "山木 明潔"
   },
   "foundingDate": "2019-04-01",
   "email": "info@akk-hokkaido.com",
@@ -34,7 +37,7 @@ export const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "合同会社AKK",
-  "image": "https://akk-hokkaido.com/logo.png",
+  "image": logoUrl,
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "南8条西13丁目4-7-405",
@@ -72,7 +75,7 @@ export const breadcrumbSchema = {
       "@type": "ListItem",
       "position": 1,
       "name": "ホーム",
-      "item": "https://akk-hokkaido.com"
+      "item": baseUrl
     }
   ]
 };

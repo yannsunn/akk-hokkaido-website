@@ -1,10 +1,9 @@
-'use client';
+﻿'use client';
 
 import React, { useState, useEffect } from 'react';
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set([0]));
 
   // 最適化: 画像サイズを小さく、画質を調整
   const slides = [
@@ -27,21 +26,28 @@ export default function Hero() {
   ];
 
   useEffect(() => {
-    // すべての画像をバックグラウンドでプリロード
-    slides.forEach((slide, index) => {
-      if (index === 0) return; // 1枚目は優先読み込み済み
+    // ���ׂẲ摜���o�b�N�O���E���h�Ńv�����[�h
+    const preloaders = slides.map((slide, index) => {
+      if (index === 0) return null; // 1���ڂ͗D��ǂݍ��ݍς�
       const img = new Image();
+      img.decoding = 'async';
       img.src = slide.image;
-      img.onload = () => {
-        setLoadedImages(prev => new Set(prev).add(index));
-      };
+      return img;
     });
 
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
 
-    return () => clearInterval(timer);
+    return () => {
+      clearInterval(timer);
+      preloaders.forEach((img) => {
+        if (img) {
+          img.src = '';
+        }
+      });
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -154,3 +160,4 @@ export default function Hero() {
     </header>
   );
 }
+
