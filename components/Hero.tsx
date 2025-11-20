@@ -104,6 +104,9 @@ export default function Hero() {
               className={`absolute inset-0 transition-opacity duration-1000 ${
                 index === currentSlide ? 'opacity-100' : 'opacity-0'
               }`}
+              style={{
+                zIndex: index === 0 ? 1 : 0
+              }}
             >
               <img
                 src={slide.image}
