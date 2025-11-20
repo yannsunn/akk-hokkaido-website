@@ -8,8 +8,8 @@ export default function Hero() {
 
   const slides = [
     {
-      image: 'https://images.unsplash.com/photo-1586864387634-56f7898d0aa7?auto=format&fit=crop&w=800&q=70',
-      alt: '北海道の美しい田園風景'
+      image: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=800&q=70',
+      alt: 'ビジネスミーティング'
     },
     {
       image: 'https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?auto=format&fit=crop&w=800&q=70',
