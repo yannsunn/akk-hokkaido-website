@@ -9,6 +9,93 @@ export default function Home() {
       <Hero />
 
       <main>
+        {/* 物流オペレーションの裏側 */}
+        <Section id="logistics" label="LOGISTICS" title="物流オペレーションの裏側">
+          <p className="text-center text-slate-300 mb-10 max-w-3xl mx-auto text-lg">
+            低温倉庫・仕分けライン・輸出コンテナを自社でハンドリングし、一次産地から国内外の小売まで一貫した品質を提供しています。
+          </p>
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6">
+            <figure className="m-0 group">
+              <div className="overflow-hidden rounded-[24px] mb-4 border border-white/10 shadow-lg">
+                <img
+                  src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=800&q=80"
+                  alt="低温倉庫でのピッキング作業"
+                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+              </div>
+              <figcaption className="text-sm text-slate-400 text-center px-4">
+                冷蔵・冷凍帯の倉庫で温度トレーサビリティを常時確認。
+              </figcaption>
+            </figure>
+            <figure className="m-0 group">
+              <div className="overflow-hidden rounded-[24px] mb-4 border border-white/10 shadow-lg">
+                <img
+                  src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=800&q=80"
+                  alt="輸送コンテナと港"
+                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+              </div>
+              <figcaption className="text-sm text-slate-400 text-center px-4">
+                海上・航空コンテナへ積み付け前に輸送条件を最適化。
+              </figcaption>
+            </figure>
+            <figure className="m-0 group">
+              <div className="overflow-hidden rounded-[24px] mb-4 border border-white/10 shadow-lg">
+                <img
+                  src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80"
+                  alt="仕分けラインでの商品検品"
+                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+              </div>
+              <figcaption className="text-sm text-slate-400 text-center px-4">
+                仕分けラインで検品・梱包を行い、多拠点配送に対応。
+              </figcaption>
+            </figure>
+          </div>
+        </Section>
+
+        {/* ご要望に応じたサポートプラン */}
+        <Section id="solutions" label="SOLUTIONS" title="ご要望に応じたサポートプラン">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6">
+            <Card>
+              <h3 className="mt-0 mb-3 text-[1.3rem] font-semibold text-white">オンライン商談</h3>
+              <p className="text-slate-300 mb-6">
+                物流要件やSKU構成を伺い、リードタイム・ロット条件をその場で調整します。
+              </p>
+              <a
+                href="#contact"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-lg transition-all hover:shadow-[0_15px_30px_rgba(59,130,246,0.3)] hover:-translate-y-1"
+              >
+                商談の予約
+              </a>
+            </Card>
+            <Card>
+              <h3 className="mt-0 mb-3 text-[1.3rem] font-semibold text-white">倉庫・センター見学</h3>
+              <p className="text-slate-300 mb-6">
+                温度管理設備や梱包フローをご覧いただき、オペレーションの透明性を確認できます。
+              </p>
+              <a
+                href="#logistics"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-lg transition-all hover:shadow-[0_15px_30px_rgba(59,130,246,0.3)] hover:-translate-y-1"
+              >
+                見学リクエスト
+              </a>
+            </Card>
+            <Card>
+              <h3 className="mt-0 mb-3 text-[1.3rem] font-semibold text-white">資料ダウンロード</h3>
+              <p className="text-slate-300 mb-6">
+                事業計画・決算サマリー・商品カタログをまとめてお送りします。
+              </p>
+              <a
+                href="/docs/akk-plan.pdf"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-lg transition-all hover:shadow-[0_15px_30px_rgba(59,130,246,0.3)] hover:-translate-y-1"
+              >
+                資料を確認
+              </a>
+            </Card>
+          </div>
+        </Section>
+
         {/* 信用指標 */}
         <Section
           id="metrics"
@@ -87,6 +174,51 @@ export default function Home() {
               <p className="text-[#6b7280] m-0">英語・中国語対応スタッフ常駐、HSコード・税制を自社で把握。</p>
             </IconCard>
           </div>
+        </Section>
+
+        {/* 調達から納品までのフロー */}
+        <Section id="flow" label="PROCESS" title="調達から納品までのフロー">
+          <p className="text-center text-[#6b7280] mb-10 max-w-3xl mx-auto">
+            産地での集荷から輸出入、国内配送までをワンストップで管理し、各工程を担当部署とデジタルツールで連携しています。
+          </p>
+          <ol className="grid gap-6 list-none p-0 m-0 md:grid-cols-2">
+            <li className="flex gap-4 p-6 bg-white rounded-[20px] border border-[#e0e7ff]">
+              <span className="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-[#c99a2e]/10 text-[#c99a2e] font-bold text-lg">
+                01
+              </span>
+              <div>
+                <h3 className="mt-0 mb-2 text-[1.1rem] font-semibold">一次産地・仕入先の選定</h3>
+                <p className="m-0 text-[#6b7280]">需要予測をもとに契約農場・加工場の生産計画を策定。</p>
+              </div>
+            </li>
+            <li className="flex gap-4 p-6 bg-white rounded-[20px] border border-[#e0e7ff]">
+              <span className="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-[#c99a2e]/10 text-[#c99a2e] font-bold text-lg">
+                02
+              </span>
+              <div>
+                <h3 className="mt-0 mb-2 text-[1.1rem] font-semibold">品質チェック & 加工</h3>
+                <p className="m-0 text-[#6b7280]">HACCP準拠の加工ラインで検品・ラベリング・梱包を実施。</p>
+              </div>
+            </li>
+            <li className="flex gap-4 p-6 bg-white rounded-[20px] border border-[#e0e7ff]">
+              <span className="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-[#c99a2e]/10 text-[#c99a2e] font-bold text-lg">
+                03
+              </span>
+              <div>
+                <h3 className="mt-0 mb-2 text-[1.1rem] font-semibold">輸送・通関</h3>
+                <p className="m-0 text-[#6b7280]">リーファー輸送/航空貨物を手配し、通関書類を自社作成。</p>
+              </div>
+            </li>
+            <li className="flex gap-4 p-6 bg-white rounded-[20px] border border-[#e0e7ff]">
+              <span className="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-[#c99a2e]/10 text-[#c99a2e] font-bold text-lg">
+                04
+              </span>
+              <div>
+                <h3 className="mt-0 mb-2 text-[1.1rem] font-semibold">国内外の納品</h3>
+                <p className="m-0 text-[#6b7280]">国内共同配送網や越境ECを活用し、納品後のフォローまで実施。</p>
+              </div>
+            </li>
+          </ol>
         </Section>
 
         {/* 実績ハイライト */}

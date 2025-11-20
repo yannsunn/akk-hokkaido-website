@@ -1,56 +1,156 @@
-import React from 'react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
 
 export default function Hero() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const slides = [
+    {
+      image: 'https://images.unsplash.com/photo-1586864387634-56f7898d0aa7?auto=format&fit=crop&w=1200&q=80',
+      alt: '北海道の美しい田園風景'
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?auto=format&fit=crop&w=1200&q=80',
+      alt: '物流倉庫の内部'
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=1200&q=80',
+      alt: '貨物コンテナと港'
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1200&q=80',
+      alt: '新鮮な農産物'
+    }
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, [slides.length]);
+
   return (
-    <header className="flex flex-wrap gap-12 px-[5vw] py-24 bg-gradient-to-br from-[#0c2140] to-[#1a3760] text-white">
-      <div className="flex-1 min-w-[280px]">
-        <p className="inline-flex items-center gap-2 px-4 py-1.5 text-[0.85rem] tracking-[0.08em] uppercase border border-white/40 rounded-full mb-4">
+    <header className="relative flex flex-col lg:flex-row gap-8 lg:gap-12 px-[5vw] py-16 lg:py-32 overflow-hidden bg-gradient-to-br from-[#0a0e1a] via-[#1e293b] to-[#0f172a]">
+      {/* 背景グラデーションオーバーレイ */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-500/10 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-amber-500/5 via-transparent to-transparent pointer-events-none" />
+
+      {/* グリッドパターン */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_80%)]" />
+
+      <div className="relative flex-1 min-w-[280px] z-10">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 lg:px-4 lg:py-2 text-[0.65rem] lg:text-[0.8rem] tracking-[0.08em] lg:tracking-[0.12em] uppercase backdrop-blur-md bg-white/5 border border-white/10 rounded-full mb-4 lg:mb-6 shadow-lg">
+          <span className="w-1.5 h-1.5 lg:w-2 lg:h-2 bg-blue-400 rounded-full animate-pulse" />
           北海道・札幌本社｜輸出入 / 小売・卸
-        </p>
-        <h1 className="text-[clamp(2rem,4vw,3.2rem)] font-bold mb-4 leading-tight">
-          価値ある北海道産品を、全国と世界へ。
+        </div>
+
+        <h1 className="text-[clamp(1.8rem,7vw,4rem)] font-bold mb-4 lg:mb-6 leading-[1.2] lg:leading-[1.1] bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent">
+          価値ある北海道産品を、<br />全国と世界へ。
         </h1>
-        <p className="text-lg text-white/90 mb-8 leading-relaxed">
+
+        <p className="text-sm lg:text-lg text-slate-300 mb-6 lg:mb-10 leading-relaxed max-w-xl">
           生産者の想いと生活者の需要をつなぐサプライチェーンを構築し、
           品質管理と資金計画を徹底しながら持続的な成長を実現します。
         </p>
-        <ul className="flex flex-wrap gap-6 mb-8 list-none p-0">
-          <li className="text-[0.95rem] text-white/85">
-            <span className="block text-[1.8rem] font-bold text-white">2019年</span>
-            創業
-          </li>
-          <li className="text-[0.95rem] text-white/85">
-            <span className="block text-[1.8rem] font-bold text-white">63社</span>
-            取引先
-          </li>
-          <li className="text-[0.95rem] text-white/85">
-            <span className="block text-[1.8rem] font-bold text-white">8カ国</span>
-            輸出
-          </li>
-        </ul>
-        <div className="flex flex-wrap gap-4">
+
+        <div className="grid grid-cols-3 gap-3 lg:gap-6 mb-6 lg:mb-10 max-w-md">
+          <div className="text-center p-2 lg:p-4 rounded-xl lg:rounded-2xl glass-effect glow-on-hover">
+            <span className="block text-[1.5rem] lg:text-[2rem] font-bold bg-gradient-to-br from-blue-400 to-blue-600 bg-clip-text text-transparent">2019年</span>
+            <span className="text-[0.6rem] lg:text-xs text-slate-400 uppercase tracking-wider">創業</span>
+          </div>
+          <div className="text-center p-2 lg:p-4 rounded-xl lg:rounded-2xl glass-effect glow-on-hover">
+            <span className="block text-[1.5rem] lg:text-[2rem] font-bold bg-gradient-to-br from-blue-400 to-blue-600 bg-clip-text text-transparent">63社</span>
+            <span className="text-[0.6rem] lg:text-xs text-slate-400 uppercase tracking-wider">取引先</span>
+          </div>
+          <div className="text-center p-2 lg:p-4 rounded-xl lg:rounded-2xl glass-effect glow-on-hover">
+            <span className="block text-[1.5rem] lg:text-[2rem] font-bold bg-gradient-to-br from-blue-400 to-blue-600 bg-clip-text text-transparent">8カ国</span>
+            <span className="text-[0.6rem] lg:text-xs text-slate-400 uppercase tracking-wider">輸出</span>
+          </div>
+        </div>
+
+        <div className="flex flex-col sm:flex-row gap-3 lg:gap-4">
           <a
             href="#contact"
-            className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-semibold bg-[#c99a2e] text-[#0c2140] shadow-[0_15px_35px_rgba(201,154,46,0.25)] transition-transform hover:-translate-y-0.5"
+            className="group inline-flex items-center justify-center gap-2 px-6 py-3 lg:px-8 lg:py-4 rounded-full text-sm lg:text-base font-semibold bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-[0_20px_40px_rgba(59,130,246,0.3)] transition-all hover:shadow-[0_25px_50px_rgba(59,130,246,0.4)] hover:-translate-y-1 hover:scale-105"
           >
             お問い合わせ
+            <svg className="w-3.5 h-3.5 lg:w-4 lg:h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
           </a>
           <a
             href="/docs/akk-plan.pdf"
-            className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-semibold border border-white/40 text-white transition-transform hover:-translate-y-0.5"
+            className="group inline-flex items-center justify-center gap-2 px-6 py-3 lg:px-8 lg:py-4 rounded-full text-sm lg:text-base font-semibold glass-effect text-white transition-all hover:bg-white/10 hover:-translate-y-1"
           >
             事業計画書
+            <svg className="w-3.5 h-3.5 lg:w-4 lg:h-4 transition-transform group-hover:translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
           </a>
         </div>
       </div>
-      <div
-        className="flex-1 min-w-[320px] min-h-[360px] rounded-[32px] bg-cover bg-center"
-        style={{
-          backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.65)), url('https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=900&q=80')`
-        }}
-        role="presentation"
-        aria-hidden="true"
-      />
+
+      <div className="relative flex-1 min-w-[280px] min-h-[300px] lg:min-h-[400px]">
+        <div className="relative w-full h-full rounded-2xl lg:rounded-[32px] shadow-[0_25px_60px_rgba(0,0,0,0.5)] border border-white/10 overflow-hidden">
+          {/* スライダー画像 */}
+          {slides.map((slide, index) => (
+            <div
+              key={index}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                index === currentSlide ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              <div
+                className="w-full h-full bg-cover bg-center"
+                style={{
+                  backgroundImage: `linear-gradient(135deg, rgba(59,130,246,0.15), rgba(0,0,0,0.5)), url('${slide.image}')`
+                }}
+                role="presentation"
+                aria-label={slide.alt}
+              />
+            </div>
+          ))}
+
+          {/* スライダーインジケーター */}
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  index === currentSlide
+                    ? 'w-8 bg-blue-400'
+                    : 'bg-white/30 hover:bg-white/50'
+                }`}
+                aria-label={`スライド ${index + 1} に移動`}
+              />
+            ))}
+          </div>
+
+          {/* ナビゲーションボタン */}
+          <button
+            onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full glass-effect flex items-center justify-center text-white hover:bg-white/20 transition-all z-10"
+            aria-label="前のスライド"
+          >
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button
+            onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
+            className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full glass-effect flex items-center justify-center text-white hover:bg-white/20 transition-all z-10"
+            aria-label="次のスライド"
+          >
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      </div>
     </header>
   );
 }

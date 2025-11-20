@@ -9,25 +9,35 @@
 }
 
 :root {
-  --bg: #f5f6fb;
-  --navy: #0c2140;
-  --navy-dark: #081325;
-  --gold: #c99a2e;
-  --text: #1f2a37;
-  --muted: #6b7280;
-  --card: #ffffff;
-  --border: #e0e7ff;
+  --bg: #0a0e1a;
+  --bg-light: #111827;
+  --navy: #1e293b;
+  --navy-dark: #0f172a;
+  --accent: #3b82f6;
+  --accent-light: #60a5fa;
+  --gold: #f59e0b;
+  --text: #f8fafc;
+  --text-muted: #94a3b8;
+  --card: #1e293b;
+  --card-glass: rgba(30, 41, 59, 0.6);
+  --border: rgba(148, 163, 184, 0.1);
+  --glow: rgba(59, 130, 246, 0.3);
 }
 
 @theme inline {
   --color-bg: var(--bg);
+  --color-bg-light: var(--bg-light);
   --color-navy: var(--navy);
   --color-navy-dark: var(--navy-dark);
+  --color-accent: var(--accent);
+  --color-accent-light: var(--accent-light);
   --color-gold: var(--gold);
   --color-text: var(--text);
-  --color-muted: var(--muted);
+  --color-text-muted: var(--text-muted);
   --color-card: var(--card);
+  --color-card-glass: var(--card-glass);
   --color-border: var(--border);
+  --color-glow: var(--glow);
   --font-sans: 'Noto Sans JP', ui-sans-serif, system-ui, sans-serif;
 }
 
@@ -41,6 +51,7 @@ body {
   color: var(--text);
   background: var(--bg);
   line-height: 1.7;
+  overflow-x: hidden;
 }
 
 img {
@@ -50,4 +61,45 @@ img {
 
 a {
   color: inherit;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* グラスモーフィズム用のバックドロップブラー */
+.glass-effect {
+  background: var(--card-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+}
+
+/* スムーズスクロール */
+html {
+  scroll-behavior: smooth;
+}
+
+/* グロー効果 */
+.glow-on-hover {
+  transition: box-shadow 0.3s ease;
+}
+
+.glow-on-hover:hover {
+  box-shadow: 0 0 20px var(--glow), 0 0 40px var(--glow);
+}
+
+/* カスタムスクロールバー */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--navy-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-light);
 }
