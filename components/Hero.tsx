@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const slides = [
     {
@@ -25,6 +26,11 @@ export default function Hero() {
   ];
 
   useEffect(() => {
+    // 最初の画像をプリロード
+    const img = new Image();
+    img.src = slides[0].image;
+    img.onload = () => setIsLoaded(true);
+
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
@@ -78,7 +84,14 @@ export default function Hero() {
       </div>
 
       <div className="relative flex-1 min-w-[280px] min-h-[300px] lg:min-h-[400px]">
-        <div className="relative w-full h-full rounded-2xl lg:rounded-[32px] shadow-[0_25px_60px_rgba(0,0,0,0.5)] border border-white/10 overflow-hidden">
+        <div className="relative w-full h-full rounded-2xl lg:rounded-[32px] shadow-[0_25px_60px_rgba(0,0,0,0.5)] border border-white/10 overflow-hidden bg-slate-800">
+          {/* ローディング背景 */}
+          {!isLoaded && (
+            <div className="absolute inset-0 bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center">
+              <div className="w-12 h-12 border-4 border-blue-400/30 border-t-blue-400 rounded-full animate-spin" />
+            </div>
+          )}
+
           {/* スライダー画像 */}
           {slides.map((slide, index) => (
             <div
@@ -87,14 +100,17 @@ export default function Hero() {
                 index === currentSlide ? 'opacity-100' : 'opacity-0'
               }`}
             >
-              <div
-                className="w-full h-full bg-cover bg-center"
+              <img
+                src={slide.image}
+                alt={slide.alt}
+                className="w-full h-full object-cover"
                 style={{
-                  backgroundImage: `linear-gradient(135deg, rgba(59,130,246,0.15), rgba(0,0,0,0.5)), url('${slide.image}')`
+                  filter: 'brightness(0.85)',
+                  background: 'linear-gradient(135deg, rgba(59,130,246,0.15), rgba(0,0,0,0.5))'
                 }}
-                role="presentation"
-                aria-label={slide.alt}
+                loading={index === 0 ? 'eager' : 'lazy'}
               />
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/15 to-black/50" />
             </div>
           ))}
 
