@@ -14,7 +14,8 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 mb-6 lg:mb-8 text-xs lg:text-sm text-slate-400">
-          <a href="#logistics" className="hover:text-blue-400 transition-colors">事業内容</a>
+          <a href="#about" className="hover:text-blue-400 transition-colors">会社について</a>
+          <a href="#business" className="hover:text-blue-400 transition-colors">事業内容</a>
           <a href="#company" className="hover:text-blue-400 transition-colors">会社概要</a>
           <a href="#contact" className="hover:text-blue-400 transition-colors">お問い合わせ</a>
         </div>
