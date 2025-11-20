@@ -1,42 +1,49 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set([0]));
 
+  // 最適化: 画像サイズを小さく、画質を調整
   const slides = [
     {
-      image: 'https://images.unsplash.com/photo-1586864387634-56f7898d0aa7?auto=format&fit=crop&w=1200&q=80',
+      image: 'https://images.unsplash.com/photo-1586864387634-56f7898d0aa7?auto=format&fit=crop&w=800&q=70',
       alt: '北海道の美しい田園風景'
     },
     {
-      image: 'https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?auto=format&fit=crop&w=1200&q=80',
+      image: 'https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?auto=format&fit=crop&w=800&q=70',
       alt: '物流倉庫の内部'
     },
     {
-      image: 'https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=1200&q=80',
+      image: 'https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=800&q=70',
       alt: '貨物コンテナと港'
     },
     {
-      image: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1200&q=80',
+      image: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=70',
       alt: '新鮮な農産物'
     }
   ];
 
   useEffect(() => {
-    // 最初の画像をプリロード
-    const img = new Image();
-    img.src = slides[0].image;
-    img.onload = () => setIsLoaded(true);
+    // すべての画像をバックグラウンドでプリロード
+    slides.forEach((slide, index) => {
+      if (index === 0) return; // 1枚目は優先読み込み済み
+      const img = new Image();
+      img.src = slide.image;
+      img.onload = () => {
+        setLoadedImages(prev => new Set(prev).add(index));
+      };
+    });
 
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
 
     return () => clearInterval(timer);
-  }, [slides.length]);
+  }, []);
 
   return (
     <header className="relative flex flex-col lg:flex-row gap-8 lg:gap-12 px-[5vw] py-16 lg:py-32 overflow-hidden bg-gradient-to-br from-[#0a0e1a] via-[#1e293b] to-[#0f172a]">
@@ -85,14 +92,7 @@ export default function Hero() {
 
       <div className="relative flex-1 min-w-[280px] min-h-[300px] lg:min-h-[400px]">
         <div className="relative w-full h-full rounded-2xl lg:rounded-[32px] shadow-[0_25px_60px_rgba(0,0,0,0.5)] border border-white/10 overflow-hidden bg-slate-800">
-          {/* ローディング背景 */}
-          {!isLoaded && (
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center">
-              <div className="w-12 h-12 border-4 border-blue-400/30 border-t-blue-400 rounded-full animate-spin" />
-            </div>
-          )}
-
-          {/* スライダー画像 */}
+          {/* スライダー画像 - Next.js Image最適化 */}
           {slides.map((slide, index) => (
             <div
               key={index}
@@ -100,17 +100,20 @@ export default function Hero() {
                 index === currentSlide ? 'opacity-100' : 'opacity-0'
               }`}
             >
-              <img
+              <Image
                 src={slide.image}
                 alt={slide.alt}
-                className="w-full h-full object-cover"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
                 style={{
-                  filter: 'brightness(0.85)',
-                  background: 'linear-gradient(135deg, rgba(59,130,246,0.15), rgba(0,0,0,0.5))'
+                  filter: 'brightness(0.85)'
                 }}
-                loading={index === 0 ? 'eager' : 'lazy'}
+                priority={index === 0}
+                quality={70}
+                unoptimized
               />
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/15 to-black/50" />
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/15 to-black/50 pointer-events-none" />
             </div>
           ))}
 

@@ -33,6 +33,13 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <head>
+        {/* 画像プリロード - 最初の1枚を優先的に読み込む */}
+        <link
+          rel="preload"
+          as="image"
+          href="https://images.unsplash.com/photo-1586864387634-56f7898d0aa7?auto=format&fit=crop&w=800&q=70"
+          fetchPriority="high"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
