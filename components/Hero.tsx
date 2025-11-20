@@ -51,25 +51,9 @@ export default function Hero() {
           価値ある北海道産品を、<br />全国と世界へ。
         </h1>
 
-        <p className="text-sm lg:text-lg text-slate-300 mb-6 lg:mb-10 leading-relaxed max-w-xl">
-          生産者の想いと生活者の需要をつなぐサプライチェーンを構築し、
-          品質管理と資金計画を徹底しながら持続的な成長を実現します。
+        <p className="text-sm lg:text-lg text-slate-300 mb-8 lg:mb-12 leading-relaxed max-w-xl">
+          北海道の良質な一次産品・加工品を国内外へ届ける合同会社AKKの公式サイト。
         </p>
-
-        <div className="grid grid-cols-3 gap-3 lg:gap-6 mb-6 lg:mb-10 max-w-md">
-          <div className="text-center p-2 lg:p-4 rounded-xl lg:rounded-2xl glass-effect glow-on-hover">
-            <span className="block text-[1.5rem] lg:text-[2rem] font-bold bg-gradient-to-br from-blue-400 to-blue-600 bg-clip-text text-transparent">2019年</span>
-            <span className="text-[0.6rem] lg:text-xs text-slate-400 uppercase tracking-wider">創業</span>
-          </div>
-          <div className="text-center p-2 lg:p-4 rounded-xl lg:rounded-2xl glass-effect glow-on-hover">
-            <span className="block text-[1.5rem] lg:text-[2rem] font-bold bg-gradient-to-br from-blue-400 to-blue-600 bg-clip-text text-transparent">63社</span>
-            <span className="text-[0.6rem] lg:text-xs text-slate-400 uppercase tracking-wider">取引先</span>
-          </div>
-          <div className="text-center p-2 lg:p-4 rounded-xl lg:rounded-2xl glass-effect glow-on-hover">
-            <span className="block text-[1.5rem] lg:text-[2rem] font-bold bg-gradient-to-br from-blue-400 to-blue-600 bg-clip-text text-transparent">8カ国</span>
-            <span className="text-[0.6rem] lg:text-xs text-slate-400 uppercase tracking-wider">輸出</span>
-          </div>
-        </div>
 
         <div className="flex flex-col sm:flex-row gap-3 lg:gap-4">
           <a
