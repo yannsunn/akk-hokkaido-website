@@ -81,7 +81,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="relative flex-1 min-w-[280px] min-h-[300px] lg:min-h-[400px]">
+      <div className="relative flex-1 min-w-[280px] h-[300px] lg:h-[400px]">
         <div className="relative w-full h-full rounded-2xl lg:rounded-[32px] shadow-[0_25px_60px_rgba(0,0,0,0.5)] border border-white/10 overflow-hidden bg-slate-800">
           {/* スライダー画像 */}
           {slides.map((slide, index) => (
