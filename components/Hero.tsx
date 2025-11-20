@@ -1,8 +1,58 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function Hero() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+
+  const slides = [
+    {
+      image: 'https://images.unsplash.com/photo-1586864387634-56f7898d0aa7?auto=format&fit=crop&w=800&q=70',
+      alt: '北海道の美しい田園風景'
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?auto=format&fit=crop&w=800&q=70',
+      alt: '物流倉庫の内部'
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=800&q=70',
+      alt: '貨物コンテナと港'
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=70',
+      alt: '新鮮な農産物'
+    }
+  ];
+
+  useEffect(() => {
+    // 1枚目の画像を強制的にプリロード
+    const firstImage = new Image();
+    firstImage.src = slides[0].image;
+    firstImage.onload = () => {
+      setIsImageLoaded(true);
+    };
+
+    // 残りの画像をバックグラウンドでプリロード
+    const preloaders = slides.slice(1).map((slide) => {
+      const img = new Image();
+      img.src = slide.image;
+      return img;
+    });
+
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 5000);
+
+    return () => {
+      clearInterval(timer);
+      preloaders.forEach((img) => {
+        img.src = '';
+      });
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <header className="relative flex flex-col lg:flex-row gap-8 lg:gap-12 px-[5vw] py-16 lg:py-32 overflow-hidden bg-gradient-to-br from-[#0a0e1a] via-[#1e293b] to-[#0f172a]">
       {/* 背景グラデーションオーバーレイ */}
@@ -41,17 +91,73 @@ export default function Hero() {
 
       <div className="relative flex-1 min-w-[280px] min-h-[300px] lg:min-h-[400px]">
         <div className="relative w-full h-full rounded-2xl lg:rounded-[32px] shadow-[0_25px_60px_rgba(0,0,0,0.5)] border border-white/10 overflow-hidden bg-slate-800">
-          <img
-            src="https://images.unsplash.com/photo-1586864387634-56f7898d0aa7?auto=format&fit=crop&w=800&q=70"
-            alt="北海道の風景"
-            className="w-full h-full object-cover"
-            style={{
-              filter: 'brightness(0.85)'
-            }}
-            loading="eager"
-            fetchPriority="high"
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/15 to-black/50 pointer-events-none" />
+          {/* スライダー画像 */}
+          {slides.map((slide, index) => (
+            <div
+              key={index}
+              className={`absolute inset-0 transition-opacity ${
+                index === currentSlide ? 'opacity-100 duration-1000' : 'opacity-0 duration-1000'
+              }`}
+              style={{
+                zIndex: index === currentSlide ? 2 : 1
+              }}
+            >
+              <img
+                src={slide.image}
+                alt={slide.alt}
+                className="w-full h-full object-cover"
+                style={{
+                  filter: 'brightness(0.85)',
+                  display: index === 0 && !isImageLoaded ? 'none' : 'block'
+                }}
+                loading={index === 0 ? 'eager' : 'lazy'}
+                fetchPriority={index === 0 ? 'high' : 'low'}
+                decoding="async"
+                onLoad={() => {
+                  if (index === 0) {
+                    setIsImageLoaded(true);
+                  }
+                }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/15 to-black/50 pointer-events-none" />
+            </div>
+          ))}
+
+          {/* スライダーインジケーター */}
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  index === currentSlide
+                    ? 'w-8 bg-blue-400'
+                    : 'bg-white/30 hover:bg-white/50'
+                }`}
+                aria-label={`スライド ${index + 1} に移動`}
+              />
+            ))}
+          </div>
+
+          {/* ナビゲーションボタン */}
+          <button
+            onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full glass-effect flex items-center justify-center text-white hover:bg-white/20 transition-all z-10"
+            aria-label="前のスライド"
+          >
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button
+            onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
+            className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full glass-effect flex items-center justify-center text-white hover:bg-white/20 transition-all z-10"
+            aria-label="次のスライド"
+          >
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
         </div>
       </div>
     </header>
