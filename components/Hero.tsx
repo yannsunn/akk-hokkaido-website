@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   const slides = [
     {
@@ -26,13 +25,6 @@ export default function Hero() {
   ];
 
   useEffect(() => {
-    // 1枚目の画像を強制的にプリロード
-    const firstImage = new Image();
-    firstImage.src = slides[0].image;
-    firstImage.onload = () => {
-      setIsImageLoaded(true);
-    };
-
     // 残りの画像をバックグラウンドでプリロード
     const preloaders = slides.slice(1).map((slide) => {
       const img = new Image();
@@ -107,17 +99,11 @@ export default function Hero() {
                 alt={slide.alt}
                 className="w-full h-full object-cover"
                 style={{
-                  filter: 'brightness(0.85)',
-                  display: index === 0 && !isImageLoaded ? 'none' : 'block'
+                  filter: 'brightness(0.85)'
                 }}
                 loading={index === 0 ? 'eager' : 'lazy'}
                 fetchPriority={index === 0 ? 'high' : 'low'}
                 decoding="async"
-                onLoad={() => {
-                  if (index === 0) {
-                    setIsImageLoaded(true);
-                  }
-                }}
               />
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/15 to-black/50 pointer-events-none" />
             </div>
