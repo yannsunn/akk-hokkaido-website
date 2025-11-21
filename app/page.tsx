@@ -112,13 +112,6 @@ export default function Home() {
                   info@akk-hokkaido.com
                 </a>
               </dd>
-
-              <dt className="font-semibold text-slate-700">ウェブサイト</dt>
-              <dd className="m-0 text-slate-900">
-                <a href="https://akk-hokkaido.com/" className="text-blue-600 hover:text-blue-700 transition-colors duration-300 ease-in-out underline break-all font-medium">
-                  https://akk-hokkaido.com/
-                </a>
-              </dd>
             </dl>
           </div>
         </Section>
