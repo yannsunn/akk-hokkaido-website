@@ -64,7 +64,7 @@ export default function Hero() {
           価値ある北海道産品を、<br />全国と世界へ。
         </h1>
 
-        <p className="text-sm lg:text-lg text-slate-700 mb-8 lg:mb-12 leading-relaxed max-w-xl font-medium">
+        <p className="text-sm lg:text-lg text-slate-800 mb-8 lg:mb-12 leading-relaxed max-w-xl font-medium">
           北海道の良質な一次産品・加工品を国内外へ届ける合同会社AKKの公式サイト。
         </p>
 

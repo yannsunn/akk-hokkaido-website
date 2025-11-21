@@ -39,10 +39,10 @@ export function IconCard({ title, children }: IconCardProps) {
       {/* アクセントライン */}
       <div className="mb-3 lg:mb-4 flex items-center gap-2 lg:gap-3">
         <div className="w-1 h-10 lg:h-12 bg-gradient-to-b from-blue-600 to-blue-500 rounded-full" />
-        <h3 className="mt-0 mb-0 text-lg lg:text-[1.3rem] font-bold text-slate-800">{title}</h3>
+        <h3 className="mt-0 mb-0 text-lg lg:text-[1.3rem] font-bold text-slate-900">{title}</h3>
       </div>
 
-      <div className="text-sm lg:text-base text-slate-700">
+      <div className="text-sm lg:text-base text-slate-800 font-medium">
         {children}
       </div>
     </Card>
