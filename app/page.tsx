@@ -108,14 +108,14 @@ export default function Home() {
 
               <dt className="font-semibold text-slate-700">メールアドレス</dt>
               <dd className="m-0 text-slate-900">
-                <a href="mailto:info@akk-hokkaido.com" className="text-blue-600 hover:text-blue-700 transition-colors underline font-medium">
+                <a href="mailto:info@akk-hokkaido.com" className="text-blue-600 hover:text-blue-700 transition-colors duration-300 ease-in-out underline font-medium">
                   info@akk-hokkaido.com
                 </a>
               </dd>
 
               <dt className="font-semibold text-slate-700">ウェブサイト</dt>
               <dd className="m-0 text-slate-900">
-                <a href="https://akk-hokkaido.com/" className="text-blue-600 hover:text-blue-700 transition-colors underline break-all font-medium">
+                <a href="https://akk-hokkaido.com/" className="text-blue-600 hover:text-blue-700 transition-colors duration-300 ease-in-out underline break-all font-medium">
                   https://akk-hokkaido.com/
                 </a>
               </dd>
@@ -142,7 +142,7 @@ export default function Home() {
                     name="name"
                     placeholder="山田 太郎"
                     required
-                    className="rounded-xl border border-slate-300 p-3 font-normal bg-white text-slate-800 placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-colors"
+                    className="rounded-xl border border-slate-300 p-3 font-normal bg-white text-slate-800 placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all duration-300 ease-in-out"
                   />
                 </label>
                 <label className="flex flex-col font-semibold text-slate-800 gap-2">
@@ -151,7 +151,7 @@ export default function Home() {
                     type="text"
                     name="company"
                     placeholder="〇〇株式会社"
-                    className="rounded-xl border border-slate-300 p-3 font-normal bg-white text-slate-800 placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-colors"
+                    className="rounded-xl border border-slate-300 p-3 font-normal bg-white text-slate-800 placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all duration-300 ease-in-out"
                   />
                 </label>
                 <label className="flex flex-col font-semibold text-slate-800 gap-2">
@@ -161,7 +161,7 @@ export default function Home() {
                     name="email"
                     placeholder="info@example.com"
                     required
-                    className="rounded-xl border border-slate-300 p-3 font-normal bg-white text-slate-800 placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-colors"
+                    className="rounded-xl border border-slate-300 p-3 font-normal bg-white text-slate-800 placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all duration-300 ease-in-out"
                   />
                 </label>
                 <label className="flex flex-col font-semibold text-slate-800 gap-2">
@@ -170,12 +170,12 @@ export default function Home() {
                     name="message"
                     rows={4}
                     placeholder="ご用件をご記入ください"
-                    className="rounded-xl border border-slate-300 p-3 font-normal bg-white text-slate-800 placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-colors resize-y"
+                    className="rounded-xl border border-slate-300 p-3 font-normal bg-white text-slate-800 placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all duration-300 ease-in-out resize-y"
                   />
                 </label>
                 <button
                   type="submit"
-                  className="mt-2 inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-semibold bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-[0_8px_20px_rgba(59,130,246,0.25)] transition-all hover:shadow-[0_12px_30px_rgba(59,130,246,0.35)] hover:-translate-y-1"
+                  className="mt-2 inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl font-semibold bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-[0_6px_16px_rgba(59,130,246,0.2)] transition-all duration-300 ease-in-out hover:shadow-[0_8px_20px_rgba(59,130,246,0.3)] hover:-translate-y-0.5"
                 >
                   送信する
                 </button>
@@ -204,7 +204,7 @@ export default function Home() {
                   <div>
                     <p className="m-0 font-semibold text-slate-800 mb-1">メール</p>
                     <p className="m-0">
-                      <a href="mailto:info@akk-hokkaido.com" className="text-blue-600 hover:text-blue-700 transition-colors underline font-medium">
+                      <a href="mailto:info@akk-hokkaido.com" className="text-blue-600 hover:text-blue-700 transition-colors duration-300 ease-in-out underline font-medium">
                         info@akk-hokkaido.com
                       </a>
                     </p>

@@ -13,7 +13,7 @@ export default function Section({ id, label, title, children, dark = false, clas
   return (
     <section
       id={id}
-      className={`relative py-12 lg:py-24 px-[5vw] my-6 lg:my-12 max-w-[1400px] mx-auto rounded-2xl lg:rounded-[40px] backdrop-blur-xl transition-all duration-500 hover:scale-[1.01] ${
+      className={`relative py-12 lg:py-24 px-[5vw] my-6 lg:my-12 max-w-[1400px] mx-auto rounded-2xl lg:rounded-[40px] backdrop-blur-xl transition-all duration-300 ease-in-out ${
         dark
           ? 'bg-gradient-to-br from-white/90 to-slate-50/90 text-slate-800 shadow-[0_10px_30px_rgba(0,0,0,0.06)] border border-slate-200/80'
           : 'bg-gradient-to-br from-white/85 to-blue-50/85 text-slate-800 shadow-[0_10px_30px_rgba(0,0,0,0.05)] border border-slate-200/70'

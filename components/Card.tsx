@@ -9,14 +9,14 @@ interface CardProps {
 export function Card({ children, className = '', dark = false }: CardProps) {
   return (
     <article
-      className={`group relative p-5 lg:p-8 rounded-2xl lg:rounded-[28px] backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_15px_35px_rgba(59,130,246,0.12)] ${
+      className={`group relative p-5 lg:p-8 rounded-2xl lg:rounded-[28px] backdrop-blur-md transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-[0_10px_25px_rgba(59,130,246,0.08)] ${
         dark
           ? 'bg-white/90 border border-slate-200/90 hover:bg-white shadow-[0_6px_16px_rgba(0,0,0,0.05)]'
           : 'bg-white/75 border border-slate-200/70 hover:bg-white/90 shadow-[0_6px_16px_rgba(0,0,0,0.04)]'
       } ${className}`}
     >
       {/* ホバー時のグロー効果 */}
-      <div className="absolute inset-0 rounded-2xl lg:rounded-[28px] bg-gradient-to-br from-blue-500/0 to-blue-500/0 group-hover:from-blue-500/5 group-hover:to-transparent transition-all duration-300 pointer-events-none" />
+      <div className="absolute inset-0 rounded-2xl lg:rounded-[28px] bg-gradient-to-br from-blue-500/0 to-blue-500/0 group-hover:from-blue-500/3 group-hover:to-transparent transition-all duration-300 ease-in-out pointer-events-none" />
 
       <div className="relative z-10">
         {children}

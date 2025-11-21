@@ -55,9 +55,9 @@ export default function Hero() {
       <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_80%)]" />
 
       <div className="relative flex-1 min-w-[280px] z-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 lg:px-4 lg:py-2 text-[0.65rem] lg:text-[0.8rem] tracking-[0.08em] lg:tracking-[0.12em] uppercase backdrop-blur-md bg-blue-600/10 border border-blue-600/20 rounded-full mb-4 lg:mb-6 shadow-md">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 lg:px-4 lg:py-2 text-[0.65rem] lg:text-[0.8rem] tracking-[0.08em] lg:tracking-[0.12em] uppercase backdrop-blur-md bg-blue-600/8 border border-blue-600/15 rounded-full mb-4 lg:mb-6 shadow-sm">
           <span className="w-1.5 h-1.5 lg:w-2 lg:h-2 bg-blue-600 rounded-full animate-pulse" />
-          <span className="text-blue-900 font-semibold">北海道・札幌本社｜輸出入 / 小売・卸</span>
+          <span className="text-blue-800 font-medium">北海道・札幌本社｜輸出入 / 小売・卸</span>
         </div>
 
         <h1 className="text-[clamp(1.8rem,7vw,4rem)] font-bold mb-4 lg:mb-6 leading-[1.2] lg:leading-[1.1] bg-gradient-to-r from-slate-800 via-blue-900 to-slate-800 bg-clip-text text-transparent">
@@ -71,10 +71,10 @@ export default function Hero() {
         <div className="flex flex-col sm:flex-row gap-3 lg:gap-4">
           <a
             href="#contact"
-            className="group inline-flex items-center justify-center gap-2 px-6 py-3 lg:px-8 lg:py-4 rounded-full text-sm lg:text-base font-semibold bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-[0_10px_30px_rgba(59,130,246,0.25)] transition-all hover:shadow-[0_15px_40px_rgba(59,130,246,0.35)] hover:-translate-y-1 hover:scale-105"
+            className="group inline-flex items-center justify-center gap-2 px-6 py-3 lg:px-8 lg:py-4 rounded-xl text-sm lg:text-base font-semibold bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-[0_4px_12px_rgba(59,130,246,0.2)] transition-all duration-300 hover:shadow-[0_6px_20px_rgba(59,130,246,0.3)] hover:-translate-y-0.5"
           >
             お問い合わせ
-            <svg className="w-3.5 h-3.5 lg:w-4 lg:h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-3.5 h-3.5 lg:w-4 lg:h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </a>
@@ -115,7 +115,7 @@ export default function Hero() {
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                className={`w-2 h-2 rounded-full transition-all duration-300 ease-in-out ${
                   index === currentSlide
                     ? 'w-8 bg-blue-500'
                     : 'bg-slate-300 hover:bg-slate-400'
@@ -128,7 +128,7 @@ export default function Hero() {
           {/* ナビゲーションボタン */}
           <button
             onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full backdrop-blur-sm bg-white/80 flex items-center justify-center text-slate-700 hover:bg-white transition-all shadow-lg z-10"
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full backdrop-blur-sm bg-white/80 flex items-center justify-center text-slate-700 hover:bg-white transition-all duration-300 ease-in-out shadow-md hover:shadow-lg z-10"
             aria-label="前のスライド"
           >
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -137,7 +137,7 @@ export default function Hero() {
           </button>
           <button
             onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full backdrop-blur-sm bg-white/80 flex items-center justify-center text-slate-700 hover:bg-white transition-all shadow-lg z-10"
+            className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full backdrop-blur-sm bg-white/80 flex items-center justify-center text-slate-700 hover:bg-white transition-all duration-300 ease-in-out shadow-md hover:shadow-lg z-10"
             aria-label="次のスライド"
           >
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -14,10 +14,10 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 mb-6 lg:mb-8 text-xs lg:text-sm text-slate-600">
-          <a href="#about" className="hover:text-blue-600 transition-colors">会社について</a>
-          <a href="#business" className="hover:text-blue-600 transition-colors">事業内容</a>
-          <a href="#company" className="hover:text-blue-600 transition-colors">会社概要</a>
-          <a href="#contact" className="hover:text-blue-600 transition-colors">お問い合わせ</a>
+          <a href="#about" className="hover:text-blue-600 transition-colors duration-300 ease-in-out">会社について</a>
+          <a href="#business" className="hover:text-blue-600 transition-colors duration-300 ease-in-out">事業内容</a>
+          <a href="#company" className="hover:text-blue-600 transition-colors duration-300 ease-in-out">会社概要</a>
+          <a href="#contact" className="hover:text-blue-600 transition-colors duration-300 ease-in-out">お問い合わせ</a>
         </div>
 
         <p className="text-slate-500 text-xs lg:text-sm mb-5 lg:mb-6">
@@ -26,9 +26,9 @@ export default function Footer() {
 
         <a
           href="#top"
-          className="group inline-flex items-center gap-2 px-5 py-2.5 lg:px-6 lg:py-3 rounded-full backdrop-blur-sm bg-white/80 border border-slate-200 text-blue-600 hover:text-blue-700 hover:bg-white transition-all hover:-translate-y-1 shadow-sm text-sm lg:text-base"
+          className="group inline-flex items-center gap-2 px-5 py-2.5 lg:px-6 lg:py-3 rounded-full backdrop-blur-sm bg-white/80 border border-slate-200 text-blue-600 hover:text-blue-700 hover:bg-white transition-all duration-300 ease-in-out hover:-translate-y-0.5 shadow-sm hover:shadow-md text-sm lg:text-base"
         >
-          <svg className="w-3.5 h-3.5 lg:w-4 lg:h-4 transition-transform group-hover:-translate-y-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className="w-3.5 h-3.5 lg:w-4 lg:h-4 transition-transform duration-300 ease-in-out group-hover:-translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
           </svg>
           PAGE TOP
