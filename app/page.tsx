@@ -1,240 +1,369 @@
-import Hero from '@/components/Hero';
-import Section from '@/components/Section';
-import { Card } from '@/components/Card';
-import Footer from '@/components/Footer';
+"use client";
+
+import React from "react";
+import { motion } from "framer-motion";
+import { ArrowRight, Building2, Globe2, Hammer, Mail, MapPin, Phone } from "lucide-react";
+
+// --- UI Components (本来は別ファイルに分けるべきですが、コピペですぐ動くようにここに記述します) ---
+
+// アニメーション付きセクションラッパー
+const FadeIn = ({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: "-100px" }}
+    transition={{ duration: 0.6, delay, ease: "easeOut" }}
+    className={className}
+  >
+    {children}
+  </motion.div>
+);
+
+// ガラス質感のカード
+const GlassCard = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
+  <div className={`bg-white/80 backdrop-blur-md border border-white/20 shadow-xl rounded-3xl p-8 ${className}`}>
+    {children}
+  </div>
+);
+
+// --- Main Page Component ---
 
 export default function Home() {
   return (
-    <div id="top">
-      <Hero />
+    <div className="min-h-screen bg-slate-50 font-sans text-slate-900 selection:bg-blue-500/30">
+      {/* 背景の装飾（ドットパターン） */}
+      <div className="fixed inset-0 z-0 pointer-events-none opacity-60"
+           style={{ backgroundImage: 'radial-gradient(circle, #94a3b8 1.5px, transparent 1.5px)', backgroundSize: '40px 40px' }}>
+      </div>
 
-      <main>
-        {/* 私たちについて */}
-        <Section id="about" label="ABOUT" title="合同会社AKKについて">
-          <div className="max-w-3xl mx-auto">
-            <p className="text-base lg:text-lg text-slate-800 leading-relaxed mb-6 font-medium">
-              合同会社AKKは、北海道札幌市を拠点とする企業です。
-              小売、輸出入、商品の製造・企画を行っております。
+      {/* --- HERO SECTION --- */}
+      <section className="relative z-10 w-full h-screen flex flex-col items-center justify-center overflow-hidden">
+        {/* 抽象的な背景グラデーション */}
+        <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-blue-400/20 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-400/20 rounded-full blur-[120px]" />
+
+        <div className="container px-4 md:px-6 relative text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+          >
+            <span className="inline-block py-1 px-3 rounded-full bg-blue-100/80 border border-blue-200 text-blue-700 text-xs font-bold tracking-widest mb-6">
+              HOKKAIDO TO THE WORLD
+            </span>
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-slate-900 mb-6">
+              合同会社<span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">AKK</span>
+            </h1>
+            <p className="max-w-2xl mx-auto text-lg md:text-xl text-slate-600 leading-relaxed mb-10">
+              北海道の価値を、世界へ。<br className="hidden md:block"/>
+              小売、輸出入、そして創造的な商品企画で未来を繋ぐ。
             </p>
-            <p className="text-base lg:text-lg text-slate-800 leading-relaxed font-medium">
-              北海道の良質な産品を、国内外のお客様へお届けすることを目指しています。
-            </p>
-          </div>
-        </Section>
 
-        {/* 事業内容 */}
-        <Section id="business" label="BUSINESS" title="事業内容">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            <Card>
-              <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-blue-500/15 flex items-center justify-center">
-                  <svg className="w-8 h-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                  </svg>
-                </div>
-                <h3 className="mt-0 mb-3 text-[1.2rem] font-semibold text-slate-900">小売</h3>
-                <p className="text-slate-800 text-sm lg:text-base font-medium">
-                  北海道産品を中心とした商品の小売販売を行っています。
-                </p>
-              </div>
-            </Card>
-            <Card>
-              <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-blue-500/15 flex items-center justify-center">
-                  <svg className="w-8 h-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <h3 className="mt-0 mb-3 text-[1.2rem] font-semibold text-slate-900">輸出入</h3>
-                <p className="text-slate-800 text-sm lg:text-base font-medium">
-                  国内外の商品の輸出入業務を行っています。
-                </p>
-              </div>
-            </Card>
-            <Card>
-              <div className="text-center">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-blue-500/15 flex items-center justify-center">
-                  <svg className="w-8 h-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                  </svg>
-                </div>
-                <h3 className="mt-0 mb-3 text-[1.2rem] font-semibold text-slate-900">商品の製造・企画</h3>
-                <p className="text-slate-800 text-sm lg:text-base font-medium">
-                  商品の企画・開発を行っています。
-                </p>
-              </div>
-            </Card>
-          </div>
-        </Section>
-
-        {/* 代表メッセージ */}
-        <Section id="message" label="MESSAGE" title="代表メッセージ">
-          <div className="max-w-3xl mx-auto bg-white/70 p-6 lg:p-8 rounded-2xl border border-slate-200/70 shadow-[0_6px_16px_rgba(0,0,0,0.04)]">
-            <div className="text-sm lg:text-base text-slate-800 leading-relaxed space-y-4">
-              <p className="mt-0">
-                はじめまして。代表の山木と申します。このたびは、合同会社AKKのホームページを
-                ご覧いただき、誠にありがとうございます。私たちは小売・商品の企画・輸出入など、
-                多岐にわたる事業を展開しております。
-              </p>
-              <p>
-                日々変化する市場環境の中で、お客様一人ひとりのニーズに真摯に向き合い、
-                信頼される商品・サービスの提供を目指してまいります。国内外を問わず、
-                多くの方々に「良いものが届いた」と感じていただけるよう、丁寧な仕事を心がけ、
-                スタッフ一同、日々努力を重ねております。
-              </p>
-              <p className="mb-0">
-                今後とも、合同会社AKKにご愛顧とご支援を賜りますよう、心よりお願い申し上げます。
-              </p>
-              <p className="mt-6 mb-0 font-semibold text-slate-900 text-right">代表　山木 明洋</p>
-            </div>
-          </div>
-        </Section>
-
-        {/* 会社概要 */}
-        <Section id="company" label="COMPANY" title="会社概要">
-          <div className="max-w-3xl mx-auto bg-white/70 p-6 lg:p-8 rounded-2xl border border-slate-200/70 shadow-[0_6px_16px_rgba(0,0,0,0.04)]">
-            <dl className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-4 m-0">
-              <dt className="font-semibold text-slate-700">会社名</dt>
-              <dd className="m-0 text-slate-900 font-medium">合同会社AKK</dd>
-
-              <dt className="font-semibold text-slate-700">運営統括責任者</dt>
-              <dd className="m-0 text-slate-900 font-medium">山木 明洋</dd>
-
-              <dt className="font-semibold text-slate-700">所在地</dt>
-              <dd className="m-0 text-slate-900 font-medium">〒064-0808<br />北海道札幌市中央区南8条西13丁目4-7-405</dd>
-
-              <dt className="font-semibold text-slate-700">電話番号</dt>
-              <dd className="m-0 text-slate-900 font-medium">080-3265-8361</dd>
-
-              <dt className="font-semibold text-slate-700">メールアドレス</dt>
-              <dd className="m-0 text-slate-900">
-                <a href="mailto:info@akk-hokkaido.com" className="text-blue-600 hover:text-blue-700 transition-colors duration-300 ease-in-out underline font-medium">
-                  info@akk-hokkaido.com
-                </a>
-              </dd>
-            </dl>
-          </div>
-        </Section>
-
-        {/* お問い合わせ */}
-        <Section id="contact" label="CONTACT" title="お問い合わせ">
-          <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* お問い合わせフォーム */}
-            <div className="bg-white/70 p-6 lg:p-8 rounded-2xl border border-slate-200/70 shadow-[0_6px_16px_rgba(0,0,0,0.04)]">
-              <h3 className="mt-0 mb-6 text-xl font-semibold text-slate-800">お問い合わせフォーム</h3>
-              <form
-                className="flex flex-col gap-4"
-                action="mailto:info@akk-hokkaido.com"
-                method="post"
-                encType="text/plain"
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <motion.a
+                href="#business"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
               >
-                <label className="flex flex-col font-semibold text-slate-800 gap-2">
-                  お名前 <span className="text-red-500 text-sm">*</span>
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="山田 太郎"
-                    required
-                    className="rounded-xl border border-slate-300 p-3 font-normal bg-white text-slate-800 placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all duration-300 ease-in-out"
-                  />
-                </label>
-                <label className="flex flex-col font-semibold text-slate-800 gap-2">
-                  会社名
-                  <input
-                    type="text"
-                    name="company"
-                    placeholder="〇〇株式会社"
-                    className="rounded-xl border border-slate-300 p-3 font-normal bg-white text-slate-800 placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all duration-300 ease-in-out"
-                  />
-                </label>
-                <label className="flex flex-col font-semibold text-slate-800 gap-2">
-                  メールアドレス <span className="text-red-500 text-sm">*</span>
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="info@example.com"
-                    required
-                    className="rounded-xl border border-slate-300 p-3 font-normal bg-white text-slate-800 placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all duration-300 ease-in-out"
-                  />
-                </label>
-                <label className="flex flex-col font-semibold text-slate-800 gap-2">
-                  お問い合わせ内容
-                  <textarea
-                    name="message"
-                    rows={4}
-                    placeholder="ご用件をご記入ください"
-                    className="rounded-xl border border-slate-300 p-3 font-normal bg-white text-slate-800 placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all duration-300 ease-in-out resize-y"
-                  />
-                </label>
-                <button
-                  type="submit"
-                  className="mt-2 inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl font-semibold bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-[0_6px_16px_rgba(59,130,246,0.2)] transition-all duration-300 ease-in-out hover:shadow-[0_8px_20px_rgba(59,130,246,0.3)] hover:-translate-y-0.5"
-                >
-                  送信する
-                </button>
-              </form>
+                事業内容を見る <ArrowRight size={18} />
+              </motion.a>
+              <motion.a
+                href="#contact"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-4 bg-white text-slate-900 border-2 border-slate-300 rounded-full font-semibold shadow-md hover:bg-slate-50 hover:border-blue-500 transition-all"
+              >
+                お問い合わせ
+              </motion.a>
             </div>
+          </motion.div>
+        </div>
 
-            {/* 連絡先情報 */}
-            <div className="bg-white/70 p-6 lg:p-8 rounded-2xl border border-slate-200/70 shadow-[0_6px_16px_rgba(0,0,0,0.04)]">
-              <h3 className="mt-0 mb-6 text-xl font-semibold text-slate-800">連絡先情報</h3>
-              <div className="space-y-4 text-sm lg:text-base">
-                <div className="flex items-start gap-3">
-                  <svg className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                  <div>
-                    <p className="m-0 font-semibold text-slate-800 mb-1">電話</p>
-                    <p className="m-0 text-slate-900 font-medium">080-3265-8361</p>
-                    <p className="m-0 text-slate-700 text-sm">平日 9:00-18:00</p>
+        {/* スクロールダウン誘導 */}
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 2 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-slate-400"
+        >
+          <div className="w-6 h-10 border-2 border-slate-300 rounded-full flex justify-center pt-2">
+            <div className="w-1 h-2 bg-slate-400 rounded-full" />
+          </div>
+        </motion.div>
+      </section>
+
+      <main className="relative z-10 space-y-32 pb-32">
+
+        {/* --- ABOUT SECTION --- */}
+        <section id="about" className="container px-4 md:px-6 mx-auto">
+          <FadeIn>
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-sm font-bold text-blue-600 tracking-widest mb-2">ABOUT US</h2>
+                <h3 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6 leading-tight">
+                  北海道から、<br />
+                  確かな価値をお届けします。
+                </h3>
+                <p className="text-slate-600 text-lg leading-relaxed mb-6">
+                  合同会社AKKは、北海道札幌市を拠点とする企業です。
+                  私たちは単なる商社ではありません。北海道の豊かな大地が生み出す良質な産品を見出し、
+                  国内のみならず世界中のお客様へ「感動」とともにお届けする架け橋です。
+                </p>
+                <div className="flex gap-4">
+                  <div className="p-4 bg-white rounded-2xl shadow-sm border border-slate-100 flex-1">
+                    <div className="text-3xl font-bold text-blue-600 mb-1">Retail</div>
+                    <div className="text-xs text-slate-500 font-bold">小売事業</div>
                   </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <svg className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                  <div>
-                    <p className="m-0 font-semibold text-slate-800 mb-1">メール</p>
-                    <p className="m-0">
-                      <a href="mailto:info@akk-hokkaido.com" className="text-blue-600 hover:text-blue-700 transition-colors duration-300 ease-in-out underline font-medium">
-                        info@akk-hokkaido.com
-                      </a>
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <svg className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                  <div>
-                    <p className="m-0 font-semibold text-slate-800 mb-1">所在地</p>
-                    <p className="m-0 text-slate-900 leading-relaxed font-medium">
-                      〒064-0808<br />
-                      北海道札幌市中央区<br />
-                      南8条西13丁目4-7-405
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <svg className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
-                  <div>
-                    <p className="m-0 font-semibold text-slate-800 mb-1">担当者</p>
-                    <p className="m-0 text-slate-900 font-medium">代表　山木 明洋</p>
+                  <div className="p-4 bg-white rounded-2xl shadow-sm border border-slate-100 flex-1">
+                    <div className="text-3xl font-bold text-purple-600 mb-1">Global</div>
+                    <div className="text-xs text-slate-500 font-bold">輸出入事業</div>
                   </div>
                 </div>
               </div>
+              <div className="relative h-[400px] bg-slate-200 rounded-[40px] overflow-hidden shadow-2xl">
+                {/* ここに本来は北海道やオフィスの画像が入ります */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-indigo-600 opacity-90 flex items-center justify-center text-white/20 font-bold text-6xl rotate-[-10deg]">
+                  AKK HOKKAIDO
+                </div>
+                <img
+                  src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=800&q=70"
+                  alt="Hokkaido Landscape"
+                  className="w-full h-full object-cover mix-blend-overlay"
+                />
+              </div>
             </div>
+          </FadeIn>
+        </section>
+
+        {/* --- BUSINESS SECTION (Bento Grid) --- */}
+        <section id="business" className="container px-4 md:px-6 mx-auto">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <FadeIn>
+              <h2 className="text-sm font-bold text-blue-600 tracking-widest mb-2">OUR BUSINESS</h2>
+              <h3 className="text-3xl md:text-4xl font-bold text-slate-900">事業内容</h3>
+            </FadeIn>
           </div>
-        </Section>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]">
+            {/* Card 1: 小売 (Large) */}
+            <FadeIn delay={0.1} className="md:col-span-2 row-span-1">
+              <div className="group relative h-full bg-white rounded-3xl p-8 border border-slate-100 shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-blue-100 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 group-hover:bg-blue-200 transition-colors" />
+
+                <div className="relative z-10 h-full flex flex-col justify-between">
+                  <div>
+                    <div className="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center text-white mb-6 shadow-lg shadow-blue-500/30">
+                      <Building2 size={24} />
+                    </div>
+                    <h4 className="text-2xl font-bold text-slate-900 mb-2">小売事業</h4>
+                    <p className="text-slate-600 max-w-md">
+                      北海道産品を中心とした商品の小売販売を行っています。
+                      地元の生産者と直接連携し、市場に出回らない希少な逸品も取り扱います。
+                    </p>
+                  </div>
+                  <div className="flex items-center text-blue-600 font-bold group-hover:translate-x-2 transition-transform">
+                    View More <ArrowRight size={16} className="ml-2" />
+                  </div>
+                </div>
+              </div>
+            </FadeIn>
+
+            {/* Card 2: 輸出入 */}
+            <FadeIn delay={0.2} className="md:col-span-1 row-span-1">
+              <div className="group relative h-full bg-slate-900 rounded-3xl p-8 border border-slate-800 shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 text-white">
+                <div className="absolute bottom-0 left-0 w-40 h-40 bg-purple-500 rounded-full blur-[60px] opacity-40 group-hover:opacity-60 transition-opacity" />
+
+                <div className="relative z-10 h-full flex flex-col justify-between">
+                  <div>
+                    <div className="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mb-6">
+                      <Globe2 size={24} className="text-blue-300" />
+                    </div>
+                    <h4 className="text-2xl font-bold mb-2">輸出入業務</h4>
+                    <p className="text-slate-300 text-sm">
+                      国内外の商品の輸出入業務。グローバルな物流ネットワークを活かし、迅速な取引を実現します。
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </FadeIn>
+
+            {/* Card 3: 企画 (Full Width optional or standard) */}
+            <FadeIn delay={0.3} className="md:col-span-3 row-span-1 md:h-[250px]">
+              <div className="group relative h-full bg-gradient-to-r from-blue-50 to-indigo-50 rounded-3xl p-8 border border-blue-100 shadow-lg overflow-hidden hover:shadow-xl transition-all duration-500 flex items-center">
+                <div className="grid md:grid-cols-2 gap-8 w-full items-center">
+                  <div>
+                    <div className="w-12 h-12 bg-indigo-500 rounded-xl flex items-center justify-center text-white mb-6 shadow-lg shadow-indigo-500/30">
+                      <Hammer size={24} />
+                    </div>
+                    <h4 className="text-2xl font-bold text-slate-900 mb-2">商品の製造・企画</h4>
+                    <p className="text-slate-600">
+                      市場ニーズを捉えた商品の企画・開発。ゼロからの立ち上げをサポートし、アイデアを形にします。
+                    </p>
+                  </div>
+                  <div className="hidden md:flex justify-center">
+                     {/* 装飾的な図形 */}
+                     <div className="flex gap-3">
+                        <div className="w-20 h-32 bg-white rounded-2xl shadow-md rotate-12 border border-slate-100" />
+                        <div className="w-20 h-32 bg-blue-100 rounded-2xl shadow-md -rotate-6 border border-blue-200" />
+                     </div>
+                  </div>
+                </div>
+              </div>
+            </FadeIn>
+          </div>
+        </section>
+
+        {/* --- MESSAGE SECTION --- */}
+        <section className="container px-4 md:px-6 mx-auto">
+          <FadeIn>
+            <GlassCard className="max-w-4xl mx-auto relative overflow-hidden">
+              <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none">
+                 <svg width="200" height="200" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21L14.017 18C14.017 16.8954 13.1216 16 12.017 16H7.19943V21H14.017ZM16.017 21V16H19.017C20.1216 16 21.017 16.8954 21.017 18V21H16.017ZM10.017 14H3.017C3.017 10.2103 5.64493 7.03242 9.16687 6.25227L12.017 9.10239L14.8671 6.25227C18.3891 7.03242 21.017 10.2103 21.017 14H14.017V12H10.017V14ZM12.017 3.00006L7.77439 7.24264L8.4815 7.94975L12.017 4.41428L15.5525 7.94975L16.2596 7.24264L12.017 3.00006Z" /></svg>
+              </div>
+              <div className="relative z-10">
+                <h2 className="text-2xl font-bold text-slate-900 mb-8 flex items-center gap-3">
+                  <span className="w-1 h-8 bg-blue-600 rounded-full"></span>
+                  代表メッセージ
+                </h2>
+                <div className="prose prose-lg text-slate-600 leading-relaxed">
+                  <p>
+                    はじめまして。代表の山木と申します。<br/>
+                    このたびは、合同会社AKKのホームページをご覧いただき、誠にありがとうございます。
+                  </p>
+                  <p>
+                    日々変化する市場環境の中で、お客様一人ひとりのニーズに真摯に向き合い、信頼される商品・サービスの提供を目指してまいります。
+                    国内外を問わず、多くの方々に「良いものが届いた」と感じていただけるよう、丁寧な仕事を心がけております。
+                  </p>
+                  <p>
+                    今後とも、合同会社AKKにご愛顧とご支援を賜りますよう、心よりお願い申し上げます。
+                  </p>
+                </div>
+                <div className="mt-8 text-right">
+                  <p className="text-slate-400 text-sm mb-1">代表</p>
+                  <p className="text-xl font-bold text-slate-900">山木 明洋</p>
+                </div>
+              </div>
+            </GlassCard>
+          </FadeIn>
+        </section>
+
+        {/* --- COMPANY & CONTACT SPLIT --- */}
+        <section id="contact" className="container px-4 md:px-6 mx-auto">
+           <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+
+              {/* 会社概要 & 連絡先 (Left Column) */}
+              <FadeIn className="space-y-8">
+                <div>
+                   <h2 className="text-sm font-bold text-blue-600 tracking-widest mb-2">INFORMATION</h2>
+                   <h3 className="text-3xl font-bold text-slate-900 mb-6">会社概要・連絡先</h3>
+                   <p className="text-slate-600 mb-8">
+                      お取引のご相談、商品に関するお問い合わせなど、お気軽にご連絡ください。
+                   </p>
+                </div>
+
+                <div className="bg-white rounded-3xl border border-slate-100 shadow-lg p-8 space-y-6">
+                   <div className="flex items-start gap-4">
+                      <div className="bg-blue-50 p-3 rounded-full text-blue-600 shrink-0">
+                         <Building2 size={20}/>
+                      </div>
+                      <div>
+                         <h4 className="font-bold text-slate-900">会社名</h4>
+                         <p className="text-slate-600">合同会社AKK</p>
+                      </div>
+                   </div>
+                   <div className="flex items-start gap-4">
+                      <div className="bg-blue-50 p-3 rounded-full text-blue-600 shrink-0">
+                         <MapPin size={20}/>
+                      </div>
+                      <div>
+                         <h4 className="font-bold text-slate-900">所在地</h4>
+                         <p className="text-slate-600">
+                            〒064-0808<br/>
+                            北海道札幌市中央区南8条西13丁目4-7-405
+                         </p>
+                      </div>
+                   </div>
+                   <div className="flex items-start gap-4">
+                      <div className="bg-blue-50 p-3 rounded-full text-blue-600 shrink-0">
+                         <Phone size={20}/>
+                      </div>
+                      <div>
+                         <h4 className="font-bold text-slate-900">電話番号</h4>
+                         <p className="text-slate-600">080-3265-8361</p>
+                         <p className="text-xs text-slate-400">平日 9:00-18:00</p>
+                      </div>
+                   </div>
+                   <div className="flex items-start gap-4">
+                      <div className="bg-blue-50 p-3 rounded-full text-blue-600 shrink-0">
+                         <Mail size={20}/>
+                      </div>
+                      <div>
+                         <h4 className="font-bold text-slate-900">メールアドレス</h4>
+                         <a href="mailto:info@akk-hokkaido.com" className="text-blue-600 hover:underline break-all">
+                            info@akk-hokkaido.com
+                         </a>
+                      </div>
+                   </div>
+                </div>
+              </FadeIn>
+
+              {/* お問い合わせフォーム (Right Column) */}
+              <FadeIn delay={0.2}>
+                <div className="bg-white rounded-3xl border border-slate-200 shadow-xl p-8 lg:p-10">
+                   <h3 className="text-2xl font-bold text-slate-900 mb-6">お問い合わせフォーム</h3>
+                   <form action="mailto:info@akk-hokkaido.com" method="post" encType="text/plain" className="space-y-5">
+                      <div className="space-y-2">
+                         <label className="text-sm font-bold text-slate-700 ml-1">お名前 <span className="text-red-500">*</span></label>
+                         <input type="text" name="name" required placeholder="山田 太郎"
+                            className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all outline-none" />
+                      </div>
+                      <div className="space-y-2">
+                         <label className="text-sm font-bold text-slate-700 ml-1">会社名</label>
+                         <input type="text" name="company" placeholder="〇〇株式会社"
+                            className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all outline-none" />
+                      </div>
+                      <div className="space-y-2">
+                         <label className="text-sm font-bold text-slate-700 ml-1">メールアドレス <span className="text-red-500">*</span></label>
+                         <input type="email" name="email" required placeholder="example@akk.com"
+                            className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all outline-none" />
+                      </div>
+                      <div className="space-y-2">
+                         <label className="text-sm font-bold text-slate-700 ml-1">お問い合わせ内容</label>
+                         <textarea name="message" rows={4} placeholder="ご用件をご記入ください"
+                            className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all outline-none resize-none" />
+                      </div>
+
+                      <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        type="submit"
+                        className="w-full py-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 transition-all mt-4"
+                      >
+                        送信する
+                      </motion.button>
+                   </form>
+                </div>
+              </FadeIn>
+
+           </div>
+        </section>
       </main>
 
-      <Footer />
+      <footer className="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+        <div className="container px-4 md:px-6 mx-auto text-center">
+          <div className="mb-8">
+             <span className="text-2xl font-bold text-white">AKK</span>
+          </div>
+          <div className="flex justify-center gap-8 mb-8 text-sm font-medium">
+             <a href="#about" className="hover:text-white transition-colors">About</a>
+             <a href="#business" className="hover:text-white transition-colors">Business</a>
+             <a href="#contact" className="hover:text-white transition-colors">Contact</a>
+          </div>
+          <p className="text-xs text-slate-600">
+            &copy; {new Date().getFullYear()} Godogaisha AKK. All Rights Reserved.
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
