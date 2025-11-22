@@ -6,6 +6,70 @@ import { ArrowRight, Building2, Globe2, Hammer, Mail, MapPin, Phone } from "luci
 
 // --- UI Components (本来は別ファイルに分けるべきですが、コピペですぐ動くようにここに記述します) ---
 
+// パーティクル（浮遊する粒子）
+const Particles = () => {
+  const particles = Array.from({ length: 15 }).map((_, i) => ({
+    id: i,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    size: Math.random() * 3 + 1,
+    duration: Math.random() * 15 + 10,
+    delay: Math.random() * 5,
+  }));
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {particles.map((p) => (
+        <motion.div
+          key={p.id}
+          className="absolute bg-blue-200/40 rounded-full"
+          style={{
+            left: `${p.x}%`,
+            top: `${p.y}%`,
+            width: p.size,
+            height: p.size,
+          }}
+          animate={{
+            y: [0, -80, 0],
+            x: [0, Math.random() * 30 - 15, 0],
+            opacity: [0.3, 0.6, 0.3],
+          }}
+          transition={{
+            duration: p.duration,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: p.delay,
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
+// 浮遊するミニカード
+const FloatingCard = ({ icon: Icon, label, delay, x, y }: any) => (
+  <motion.div
+    initial={{ opacity: 0, scale: 0.8 }}
+    animate={{
+      opacity: 1,
+      scale: 1,
+      y: [0, -12, 0],
+    }}
+    transition={{
+      opacity: { duration: 1, delay },
+      scale: { duration: 1, delay },
+      y: { duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: delay * 1.5 }
+    }}
+    className="absolute hidden lg:flex items-center gap-2 bg-white/90 backdrop-blur-md border border-blue-100 px-4 py-2 rounded-xl shadow-lg"
+    style={{ left: x, top: y }}
+  >
+    <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center text-blue-600">
+      <Icon size={16} />
+    </div>
+    <span className="text-sm font-semibold text-slate-700">{label}</span>
+  </motion.div>
+);
+
 // アニメーション付きセクションラッパー
 const FadeIn = ({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) => (
   <motion.div
@@ -42,21 +106,36 @@ export default function Home() {
         <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-blue-400/20 rounded-full blur-[120px]" />
         <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-400/20 rounded-full blur-[120px]" />
 
-        <div className="container px-4 md:px-6 relative text-center">
+        {/* パーティクルアニメーション */}
+        <Particles />
+
+        {/* 浮遊するカード（情報密度を上げる） */}
+        <FloatingCard icon={Globe2} label="グローバル展開" delay={0.5} x="10%" y="15%" />
+        <FloatingCard icon={Building2} label="北海道産品" delay={0.8} x="80%" y="20%" />
+        <FloatingCard icon={Hammer} label="商品企画" delay={1.1} x="75%" y="75%" />
+
+        <div className="container px-4 md:px-6 relative text-center z-20">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
           >
-            <span className="inline-block py-1 px-3 rounded-full bg-blue-100/80 border border-blue-200 text-blue-700 text-xs font-bold tracking-widest mb-6">
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="inline-flex items-center gap-2 py-2 px-4 rounded-full bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 text-blue-700 text-xs font-bold tracking-widest mb-8 shadow-lg shadow-blue-100"
+            >
+              <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
               HOKKAIDO TO THE WORLD
-            </span>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-slate-900 mb-6">
-              合同会社<span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">AKK</span>
+            </motion.div>
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-slate-900 mb-8 leading-tight">
+              北海道の価値を<br className="hidden md:block" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-600 bg-[length:200%_auto] animate-gradient">世界へ</span>
             </h1>
-            <p className="max-w-2xl mx-auto text-lg md:text-xl text-slate-600 leading-relaxed mb-10">
-              北海道の価値を、世界へ。<br className="hidden md:block"/>
-              小売、輸出入、そして創造的な商品企画で未来を繋ぐ。
+            <p className="max-w-2xl mx-auto text-lg md:text-xl text-slate-700 leading-relaxed mb-12 font-medium">
+              合同会社AKKは、<span className="text-blue-600 font-bold">小売・輸出入・商品企画</span>を通じて、<br className="hidden md:block"/>
+              北海道の良質な産品を国内外のお客様へお届けする架け橋です。
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
